@@ -1,3 +1,4 @@
+# Platform configuration for p.maxdaten.io
 apiVersion: platform.maxdaten.io/v1
 kind: PlatformApp
 owners:
