@@ -1,0 +1,6 @@
+apiVersion: platform.maxdaten.io/v1
+kind: PlatformApp
+owners:
+  - jloos@maxdaten.com
+budget: 3
+manifestPath: k8s/
