@@ -12,7 +12,8 @@ kind: PlatformApp
 # Example:
 #   owners:
 #     - developer@example.com
-owners: []
+owners:
+  - jloos@maxdaten.com
 
 # Monthly budget limit in USD (min: $1, max: $20).
 # A billing alert fires at 80% of this value.  The GCP project is
