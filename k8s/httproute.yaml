@@ -1,0 +1,18 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: platform-landing
+spec:
+  parentRefs:
+    - name: platform-gateway
+      namespace: gateway
+  hostnames:
+    - p.maxdaten.io
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: platform-landing
+          port: 80

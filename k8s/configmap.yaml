@@ -1,0 +1,309 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: platform-landing-html
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>p.maxdaten.io — Platform</title>
+      <meta name="description" content="maxdaten.io application platform — GKE Autopilot, Flux CD, Crossplane">
+      <style>
+        @font-face {
+          font-family: 'JetBrains Mono';
+          font-style: normal;
+          font-weight: 400;
+          font-display: swap;
+          src: url('https://cdn.jsdelivr.net/fontsource/fonts/jetbrains-mono@latest/latin-400-normal.woff2') format('woff2');
+        }
+        @font-face {
+          font-family: 'JetBrains Mono';
+          font-style: normal;
+          font-weight: 600;
+          font-display: swap;
+          src: url('https://cdn.jsdelivr.net/fontsource/fonts/jetbrains-mono@latest/latin-600-normal.woff2') format('woff2');
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+          --bg: #0a0a0a;
+          --surface: #111111;
+          --border: #1e1e1e;
+          --border-highlight: #2a2a2a;
+          --text: #e0e0e0;
+          --text-muted: #6b6b6b;
+          --accent: #3b82f6;
+          --accent-dim: #1e3a5f;
+          --green: #22c55e;
+          --green-dim: #0a3d1f;
+        }
+
+        body {
+          font-family: 'JetBrains Mono', ui-monospace, 'Cascadia Code', 'Fira Code', monospace;
+          background: var(--bg);
+          color: var(--text);
+          line-height: 1.6;
+          min-height: 100vh;
+        }
+
+        .container {
+          max-width: 720px;
+          margin: 0 auto;
+          padding: 3rem 1.5rem;
+        }
+
+        header {
+          margin-bottom: 3rem;
+        }
+
+        .prompt {
+          color: var(--text-muted);
+          font-size: 0.75rem;
+          margin-bottom: 0.5rem;
+        }
+
+        h1 {
+          font-size: 1.25rem;
+          font-weight: 600;
+          letter-spacing: -0.02em;
+        }
+
+        h1 .domain {
+          color: var(--accent);
+        }
+
+        .tagline {
+          color: var(--text-muted);
+          font-size: 0.8rem;
+          margin-top: 0.25rem;
+        }
+
+        .status-line {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          margin-top: 1rem;
+          padding: 0.35rem 0.75rem;
+          background: var(--green-dim);
+          border: 1px solid #16a34a33;
+          border-radius: 4px;
+          font-size: 0.7rem;
+          color: var(--green);
+        }
+
+        .status-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: var(--green);
+        }
+
+        section {
+          margin-bottom: 2.5rem;
+        }
+
+        .section-header {
+          font-size: 0.7rem;
+          color: var(--text-muted);
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          padding-bottom: 0.5rem;
+          border-bottom: 1px solid var(--border);
+          margin-bottom: 1rem;
+        }
+
+        .stack-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+          gap: 0.75rem;
+        }
+
+        .stack-item {
+          padding: 0.75rem;
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: 4px;
+          transition: border-color 0.15s;
+        }
+
+        .stack-item:hover {
+          border-color: var(--border-highlight);
+        }
+
+        .stack-item .name {
+          font-size: 0.8rem;
+          font-weight: 600;
+          margin-bottom: 0.15rem;
+        }
+
+        .stack-item .desc {
+          font-size: 0.7rem;
+          color: var(--text-muted);
+        }
+
+        .app-list {
+          list-style: none;
+        }
+
+        .app-list li {
+          display: flex;
+          align-items: baseline;
+          justify-content: space-between;
+          padding: 0.5rem 0;
+          border-bottom: 1px solid var(--border);
+          font-size: 0.8rem;
+        }
+
+        .app-list li:last-child {
+          border-bottom: none;
+        }
+
+        .app-list .app-name {
+          font-weight: 600;
+        }
+
+        .app-list .app-url {
+          color: var(--text-muted);
+          font-size: 0.7rem;
+        }
+
+        .app-list a {
+          color: var(--text-muted);
+          text-decoration: none;
+        }
+
+        .app-list a:hover {
+          color: var(--accent);
+        }
+
+        .info-grid {
+          display: grid;
+          grid-template-columns: max-content 1fr;
+          gap: 0.25rem 1.5rem;
+          font-size: 0.75rem;
+        }
+
+        .info-grid .key {
+          color: var(--text-muted);
+        }
+
+        .info-grid .val {
+          color: var(--text);
+        }
+
+        footer {
+          margin-top: 3rem;
+          padding-top: 1.5rem;
+          border-top: 1px solid var(--border);
+          font-size: 0.65rem;
+          color: var(--text-muted);
+        }
+
+        footer a {
+          color: var(--text-muted);
+          text-decoration: none;
+        }
+
+        footer a:hover {
+          color: var(--accent);
+        }
+
+        @media (max-width: 480px) {
+          .container { padding: 2rem 1rem; }
+          .stack-grid { grid-template-columns: 1fr; }
+          .app-list li { flex-direction: column; gap: 0.15rem; }
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <header>
+          <div class="prompt">$ kubectl get platform</div>
+          <h1><span class="domain">p.maxdaten.io</span></h1>
+          <div class="tagline">application platform</div>
+          <div class="status-line">
+            <span class="status-dot"></span>
+            operational &mdash; europe-north1
+          </div>
+        </header>
+
+        <section>
+          <div class="section-header">stack</div>
+          <div class="stack-grid">
+            <div class="stack-item">
+              <div class="name">GKE Autopilot</div>
+              <div class="desc">Managed Kubernetes</div>
+            </div>
+            <div class="stack-item">
+              <div class="name">Flux CD</div>
+              <div class="desc">GitOps delivery</div>
+            </div>
+            <div class="stack-item">
+              <div class="name">Crossplane</div>
+              <div class="desc">Infrastructure as Code</div>
+            </div>
+            <div class="stack-item">
+              <div class="name">Cert-Manager</div>
+              <div class="desc">TLS automation</div>
+            </div>
+            <div class="stack-item">
+              <div class="name">External Secrets</div>
+              <div class="desc">Secret sync from GCP</div>
+            </div>
+            <div class="stack-item">
+              <div class="name">Gateway API</div>
+              <div class="desc">L7 traffic routing</div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-header">apps</div>
+          <ul class="app-list">
+            <li>
+              <span class="app-name">mealie</span>
+              <a class="app-url" href="https://mealie.p.maxdaten.io">mealie.p.maxdaten.io</a>
+            </li>
+            <li>
+              <span class="app-name">consultant</span>
+              <a class="app-url" href="https://consultant.p.maxdaten.io">consultant.p.maxdaten.io</a>
+            </li>
+            <li>
+              <span class="app-name">recipe-creator</span>
+              <a class="app-url" href="https://recipe-creator.p.maxdaten.io">recipe-creator.p.maxdaten.io</a>
+            </li>
+            <li>
+              <span class="app-name">betrieb.systems</span>
+              <a class="app-url" href="https://betrieb.systems">betrieb.systems</a>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <div class="section-header">info</div>
+          <div class="info-grid">
+            <span class="key">region</span>
+            <span class="val">europe-north1 (Finland)</span>
+            <span class="key">provider</span>
+            <span class="val">Google Cloud Platform</span>
+            <span class="key">cluster</span>
+            <span class="val">GKE Autopilot</span>
+            <span class="key">delivery</span>
+            <span class="val">OCI artifacts via Flux CD</span>
+            <span class="key">dns</span>
+            <span class="val">Cloud DNS + Crossplane</span>
+            <span class="key">tls</span>
+            <span class="val">Let's Encrypt (DNS-01)</span>
+          </div>
+        </section>
+
+        <footer>
+          <a href="https://github.com/maxdaten-io">github.com/maxdaten-io</a>
+        </footer>
+      </div>
+    </body>
+    </html>
